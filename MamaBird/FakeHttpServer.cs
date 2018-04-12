@@ -5,30 +5,37 @@ using System.Threading;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
+using Microsoft.Net.Http.Server;
 
 namespace MamaBird
 {
     public class FakeHttpServer
     {
-        private HttpListener _listener = new HttpListener();
+        // private HttpListener _listener = new HttpListener();
         private Func<HttpListenerRequest, string> _responderMethod;
         private Dictionary<string, Queue<HttpInteraction>> _config;
+        private WebListenerSettings _settings;
+        private WebListener _webListener;
         private string[] _prefixes;
 
-        public HttpListener Listener { get => _listener; set => _listener = value; }
+        // public HttpListener Listener { get => _listener; set => _listener = value; }
         public Func<HttpListenerRequest, string> ResponderMethod { get => _responderMethod; set => _responderMethod = value; }
         public Dictionary<string, Queue<HttpInteraction>> Config { get => _config; set => _config = value; }
         public string[] Prefixes { get => _prefixes; set => _prefixes = value; }
+        public WebListenerSettings Settings { get => _settings; set => _settings = value; }
+        public WebListener WebListener { get => _webListener; set => _webListener = value; }
 
         public FakeHttpServer(string[] prefixes)
         {
             _prefixes = prefixes;
             _config = new Dictionary<string, Queue<HttpInteraction>>();
+            _settings = new WebListenerSettings();
             foreach (var prefix in _prefixes)
             {
-                _listener.Prefixes.Add(prefix);
+                _settings.UrlPrefixes.Add(prefix);
             }
-            _listener.Start();
+            _webListener = new WebListener(_settings);
+            _webListener.Start();
         }
 
         public void LoadConfig(string filepath)
@@ -52,11 +59,11 @@ namespace MamaBird
                 Console.WriteLine($"FakeHttpServer listening... ");
                 try
                 {
-                    while (_listener.IsListening)
+                    while (_webListener.IsListening)
                     {
                         ThreadPool.QueueUserWorkItem((c) =>
                         {
-                            var ctx = c as HttpListenerContext;
+                            var ctx = c as RequestContext;
                             try
                             {
                                 var request = ctx.Request;
@@ -72,41 +79,37 @@ namespace MamaBird
                                     }
                                     if (interaction.Headers.Count > 0)
                                     {
-                                        foreach(var item in interaction.Headers)
+                                        foreach (var item in interaction.Headers)
                                         {
                                             //TODO: Support headers in response
                                         }
                                     }
                                     response.StatusCode = interaction.StatusCode;
                                     var buffer = Encoding.UTF8.GetBytes(interaction.Content);
-                                    response.ContentLength64 = buffer.Length;
-                                    response.OutputStream.Write(buffer, 0, buffer.Length);
+                                    response.ContentLength = buffer.Length;
+                                    response.ContentType = "text/plain";
+                                    response.Body.Write(buffer, 0, buffer.Length);
                                 }
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine(ex.ToString());    
+                                Console.WriteLine(ex.ToString());
                             }
                             finally
                             {
-                                ctx.Response.OutputStream.Close();
+                                ctx.Dispose();
                             }
-                        }, _listener.GetContext());
+                        }, _webListener.AcceptAsync().Result);
                     }
                 }
                 catch
-                {}
+                { }
             });
         }
 
         public void Stop()
         {
-            _listener.Stop();
-            while(_listener.IsListening)
-            {
-                Thread.Sleep(100);
-            }
-            _listener.Close();
+            _webListener.Dispose();
         }
     }
 }
