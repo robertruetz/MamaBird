@@ -1,6 +1,4 @@
-﻿using System;
-using Xunit;
-using Newtonsoft.Json.Linq;
+﻿using Xunit;
 
 namespace MamaBird.Test
 {

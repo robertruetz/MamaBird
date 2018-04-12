@@ -1,16 +1,11 @@
-﻿using System;
-using System.Net;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Newtonsoft.Json;
-using System.Linq;
 
 namespace MamaBird
 {
@@ -72,11 +67,8 @@ namespace MamaBird
             }
             catch (Exception ex)
             {
-                // throw ex;
-            }
-            finally
-            {
-                
+                // Swallow all exceptions
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -103,59 +95,5 @@ namespace MamaBird
                 _config[hI.Route].Enqueue(hI);
             }
         }
-
-        //public void Run()
-        //{
-        //    ThreadPool.QueueUserWorkItem((x) =>
-        //    {
-        //        Console.WriteLine($"FakeHttpServer listening... ");
-        //        try
-        //        {
-        //            while (_listener.IsListening)
-        //            {
-        //                ThreadPool.QueueUserWorkItem((c) =>
-        //                {
-        //                    var ctx = c as HttpListenerContext;
-        //                    try
-        //                    {
-        //                        var request = ctx.Request;
-        //                        var response = ctx.Response;
-        //                        response.StatusCode = 404;
-        //                        var rawUrl = request.RawUrl;
-        //                        if (_config.ContainsKey(rawUrl))
-        //                        {
-        //                            var interaction = _config[rawUrl].Dequeue();
-        //                            if (interaction.Delay > 0)
-        //                            {
-        //                                Thread.Sleep(interaction.Delay);
-        //                            }
-        //                            if (interaction.Headers.Count > 0)
-        //                            {
-        //                                foreach (var item in interaction.Headers)
-        //                                {
-        //                                    //TODO: Support headers in response
-        //                                }
-        //                            }
-        //                            response.StatusCode = interaction.StatusCode;
-        //                            var buffer = Encoding.UTF8.GetBytes(interaction.Content);
-        //                            response.ContentLength64 = buffer.Length;
-        //                            response.OutputStream.Write(buffer, 0, buffer.Length);
-        //                        }
-        //                    }
-        //                    catch (Exception ex)
-        //                    {
-        //                        Console.WriteLine(ex.ToString());
-        //                    }
-        //                    finally
-        //                    {
-        //                        ctx.Response.OutputStream.Close();
-        //                    }
-        //                }, _listener.GetContext());
-        //            }
-        //        }
-        //        catch
-        //        { }
-        //    });
-        //}
     }
 }

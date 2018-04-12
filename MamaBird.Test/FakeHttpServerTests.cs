@@ -1,9 +1,6 @@
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
+using System.Net.Http;
 using Xunit;
 
 namespace MamaBird.Test
@@ -97,7 +94,6 @@ namespace MamaBird.Test
         [Fact]
         public void FakeHttpServer_MultipleRoutes_ReturnsExpectedContent()
         {
-            //Server = new FakeHttpServer(Port);
             Server.LoadConfig(@"./TestAssets/testCase3.json");
             Server.Run();
             var client = new HttpClient();
