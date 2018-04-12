@@ -1,0 +1,15 @@
+{
+    "Name": "AllTransSucceed",
+    "Description": "HQ returns a valid batch of 100 TransactionIDs and returns success on all of them.",
+    "HttpInteractions": [
+        {
+            "Verb": "Post",
+            "StatusCode": 200,
+            "Route": "/test",
+            "Content": "THIS IS A TEST!",
+            "Headers": {},
+            "Delay":  0
+        }
+    ]
+}
+ 

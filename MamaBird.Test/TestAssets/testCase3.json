@@ -1,0 +1,23 @@
+{
+    "Name": "MultipleRoutes",
+    "Description": "Multiple Http Interactions with different routes.",
+    "HttpInteractions": [
+        {
+            "Verb": "Post",
+            "StatusCode": 200,
+            "Route": "/test",
+            "Content": "{ \"data\": \"test\" }",
+            "Headers": {},
+            "Delay": 0
+        },
+        {
+            "Verb": "Post",
+            "StatusCode": 201,
+            "Route": "/test2",
+            "Content": "{ \"data\": \"test2\" }",
+            "Headers": {},
+            "Delay": 0
+        }
+    ]
+}
+ 

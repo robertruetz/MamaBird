@@ -1,0 +1,23 @@
+{
+    "Name": "MultipleRequests",
+    "Description": "Multiple Http Interactions.",
+    "HttpInteractions": [
+        {
+            "Verb": "Post",
+            "StatusCode": 200,
+            "Route": "/test",
+            "Content": "THIS IS A TEST!",
+            "Headers": {},
+            "Delay": 0
+        },
+        {
+            "Verb": "Post",
+            "StatusCode": 201,
+            "Route": "/test",
+            "Content": "This is the second response.",
+            "Headers": {},
+            "Delay":  0
+        }
+    ]
+}
+ 
