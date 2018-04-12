@@ -11,22 +11,12 @@ namespace MamaBird.Test
         public string data;
     }
     
-    public class FakeHttpServerTests : IDisposable
+    public class FakeHttpServerTests
     {
         public int Port = 5099;
         public List<string> Prefixes = new List<string>();
         public FakeHttpServer Server;
 
-        public FakeHttpServerTests()
-        {
-            Prefixes.Add($"http://localhost:{Port}/");
-        }
-
-        public void Dispose()
-        {
-            Server.Stop();
-            Server = null;
-        }
 
         [Fact]
         public void FakeHttpServer_Constructor()
@@ -38,14 +28,18 @@ namespace MamaBird.Test
         [Fact]
         public void FakeHttpServer_CanLoadConfigFromFile()
         {
+            Prefixes.Add($"http://localhost:{Port}/");
             Server = new FakeHttpServer(Prefixes.ToArray());
             Server.LoadConfig(@".\TestAssets\testCase1.json");
             Assert.Single(Server.Config);
+            Server.Stop();
+            Server = null;
         }
 
         [Fact]
         public void FakeHttpServer_WhenNoConfigAdded_Returns404()
         {
+            Prefixes.Add($"http://localhost:{Port}/");
             Server = new FakeHttpServer(Prefixes.ToArray());
             Server.Run();
             var client = new HttpClient();
@@ -54,11 +48,14 @@ namespace MamaBird.Test
             var content = new StringContent("{'data': 'test'}");
             var result = client.PostAsync(client.BaseAddress, content).Result;
             Assert.Equal(404, (int)result.StatusCode);
+            Server.Stop();
+            Server = null;
         }
 
         [Fact]
         public void FakeHttpServer_SingleRequest_ReturnsExpectedContent()
         {
+            Prefixes.Add($"http://localhost:{Port}/");
             Server = new FakeHttpServer(Prefixes.ToArray());
             Server.Run();
             Server.LoadConfig(@".\TestAssets\testCase1.json");
@@ -71,11 +68,14 @@ namespace MamaBird.Test
             var respContent = result.Content.ReadAsStringAsync().Result;
             Assert.NotNull(respContent);
             Assert.Equal("THIS IS A TEST!", respContent);
+            Server.Stop();
+            Server = null;
         }
 
         [Fact]
         public void FakeHttpServer_MultipleRequests_ReturnsExpectedContent()
         {
+            Prefixes.Add($"http://localhost:{Port}/");
             Server = new FakeHttpServer(Prefixes.ToArray());
             Server.Run();
             Server.LoadConfig(@".\TestAssets\testCase2.json");
@@ -92,11 +92,14 @@ namespace MamaBird.Test
             // Second request
             result = client.PostAsync(client.BaseAddress, content).Result;
             Assert.Equal(201, (int)result.StatusCode);
+            Server.Stop();
+            Server = null;
         }
 
         [Fact]
         public void FakeHttpServer_MultipleRoutes_ReturnsExpectedContent()
         {
+            Prefixes.Add($"http://localhost:{Port}/");
             Server = new FakeHttpServer(Prefixes.ToArray());
             Server.Run();
             Server.LoadConfig(@".\TestAssets\testCase3.json");
@@ -121,6 +124,8 @@ namespace MamaBird.Test
             jsonResp = JsonConvert.DeserializeObject<FakeData>(respContent);
             Assert.NotNull(jsonResp);
             Assert.Equal("test2", jsonResp.data);
+            Server.Stop();
+            Server = null;
         }
     }
 }
