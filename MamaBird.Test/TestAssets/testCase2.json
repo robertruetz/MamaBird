@@ -16,7 +16,7 @@
             "Route": "/test",
             "Content": "This is the second response.",
             "Headers": {},
-            "Delay":  0
+            "Delay": 0  
         }
     ]
 }
