@@ -11,12 +11,21 @@ namespace MamaBird.Test
         public string data;
     }
     
-    public class FakeHttpServerTests
+    public class FakeHttpServerTests : IDisposable
     {
         public int Port = 5099;
         public List<string> Prefixes = new List<string>();
         public FakeHttpServer Server;
 
+        public FakeHttpServerTests()
+        {
+            Prefixes.Add($"http://localhost:{Port}/");
+        }
+
+        public void Dispose()
+        {
+            Prefixes.Clear();
+        }
 
         [Fact]
         public void FakeHttpServer_Constructor()

@@ -102,6 +102,10 @@ namespace MamaBird
         public void Stop()
         {
             _listener.Stop();
+            while(_listener.IsListening)
+            {
+                Thread.Sleep(100);
+            }
             _listener.Close();
         }
     }
