@@ -12,4 +12,4 @@ branches:
 script: 
   - dotnet restore
   - dotnet build -c Release
-  - dotnet test MamaBird.Test/MamaBird.Test.csproj
+  - dotnet test MamaBird.Test/MamaBird.Test.csproj -p:ParallelizeTestCollections=false
