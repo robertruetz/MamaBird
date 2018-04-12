@@ -20,7 +20,7 @@
     <ProjectReference Include="..\MamaBird\MamaBird.csproj" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(ProjectDir)TestAssets\*.* $(TargetDir)TestAssets\ /s /y" />
-  </Target>
+  <ItemGroup>
+    <Content Include=".\TestAssets\*.json" CopyToOutputDirectory="Always" />
+  </ItemGroup>
 </Project>
