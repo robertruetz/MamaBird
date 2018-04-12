@@ -1,4 +1,4 @@
-languag: csharp
+language: csharp
 solution: MamaBird.sln
 sudo: required
 dist: trusty
@@ -9,8 +9,7 @@ branches:
   only:
     - master
 
-install:
-  - dotnet restore
 script: 
-  - dotnet build 
+  - dotnet restore
+  - dotnet build -c Release
   - dotnet test MamaBird.Test/MamaBird.Test.csproj
