@@ -1,0 +1,8 @@
+languag: csharp
+mono: none
+dotnet: 2.1.103
+install:
+  - dotnet restore
+script: 
+  - dotnet build 
+  - dotnet test MamaBird.Test/MamaBird.Test.csproj
