@@ -72,7 +72,7 @@ namespace MamaBird
             }
             catch (Exception ex)
             {
-                throw ex;
+                // throw ex;
             }
             finally
             {

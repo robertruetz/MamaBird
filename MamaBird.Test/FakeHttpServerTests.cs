@@ -41,7 +41,7 @@ namespace MamaBird.Test
         public void FakeHttpServer_CanLoadConfigFromFile()
         {
             Server = new FakeHttpServer(Port);
-            Server.LoadConfig(@".\TestAssets\testCase1.json");
+            Server.LoadConfig(@"./TestAssets/testCase1.json");
             Assert.Single(Server.Config);
         }
 
@@ -60,7 +60,7 @@ namespace MamaBird.Test
         [Fact]
         public void FakeHttpserver_SingleRequest_ReturnsExpectedContent()
         {
-            Server.LoadConfig(@".\TestAssets\testCase1.json");
+            Server.LoadConfig(@"./TestAssets/testCase1.json");
             Server.Run();
             var client = new HttpClient();
             client.BaseAddress = new System.Uri("http://localhost:5099/test");
@@ -76,7 +76,7 @@ namespace MamaBird.Test
         [Fact]
         public void FakeHttpServer_MultipleRequests_ReturnsExpectedContent()
         {
-            Server.LoadConfig(@".\TestAssets\testCase2.json");
+            Server.LoadConfig(@"./TestAssets/testCase2.json");
             Server.Run();
             Assert.Equal(2, Server.Config["/test"].Count);
             var client = new HttpClient();
@@ -98,7 +98,7 @@ namespace MamaBird.Test
         public void FakeHttpServer_MultipleRoutes_ReturnsExpectedContent()
         {
             //Server = new FakeHttpServer(Port);
-            Server.LoadConfig(@".\TestAssets\testCase3.json");
+            Server.LoadConfig(@"./TestAssets/testCase3.json");
             Server.Run();
             var client = new HttpClient();
             client.BaseAddress = new System.Uri("http://localhost:5099/test");
