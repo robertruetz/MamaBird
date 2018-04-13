@@ -35,7 +35,7 @@ deploy:
     branch: master
     appveyor_repo_tag: true
 - provider: NuGet
-  server: https://www.myget.org/F/robertruetz-ci/api/v3/index.json
+  server: https://www.myget.org/F/robertruetz-ci/api/v2/package
   api_key:
     secure: KvkY4kOsTXyIRHqJfrjVA2dV/VQ8cwh/LrQzIO0Bc6RWoUcx0KfIssL0gXACYfOObmxcAcJwmoliOiXHZMEy1WN1nAajzPR44jcNuBoXS/jvS775KIpHb0r9xW1Nq4ii5aNmMJed1Hiy5HHwxAHn5gAlmODuRr7hhpGkUck0g3xgIffofkJI24zVYqpKHFOG
   on:
