@@ -11,6 +11,7 @@
     <PackageTags />
     <PackageId>MamaBird.AspNetCore</PackageId>
     <IsPackable>True</IsPackable>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
   <ItemGroup>
