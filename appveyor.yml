@@ -37,6 +37,6 @@ deploy:
 - provider: NuGet
   server: https://www.myget.org/F/robertruetz-ci/api/v2/package
   api_key:
-    secure: KvkY4kOsTXyIRHqJfrjVA2dV/VQ8cwh/LrQzIO0Bc6RWoUcx0KfIssL0gXACYfOObmxcAcJwmoliOiXHZMEy1WN1nAajzPR44jcNuBoXS/jvS775KIpHb0r9xW1Nq4ii5aNmMJed1Hiy5HHwxAHn5gAlmODuRr7hhpGkUck0g3xgIffofkJI24zVYqpKHFOG
+    secure: kBa9n3Sh5DMRFrwYh7gOhdV7ho0GjJhOCx7npdj7J0II+PndJFceqvl4SjHx1dcH
   on:
     branch: master
