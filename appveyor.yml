@@ -6,7 +6,7 @@ branches:
   - master
 image: Visual Studio 2017
 configuration: Release
-platform: Any CPU
+platform: x64
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
