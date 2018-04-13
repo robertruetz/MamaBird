@@ -1,4 +1,6 @@
 ![Travis-CI Build Status](https://travis-ci.org/robertruetz/MamaBird.svg?branch=master)
+[![Build status](https://ci.appveyor.com/api/projects/status/9iml10349ue5v87u?svg=true)](https://ci.appveyor.com/project/robertruetz/mamabird)
+
 # MamaBird
 Fake HTTP Server for use in testing where there is a need for parroted http responses
 

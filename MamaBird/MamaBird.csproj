@@ -5,6 +5,12 @@
     <Version>0.0.1</Version>
     <Authors>Robert Ruetz</Authors>
     <Description>Fake HTTP Server for use in testing where there is a need for parroted http responses</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/robertruetz/MamaBird</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags />
+    <PackageId>MamaBird.AspNetCore</PackageId>
+    <IsPackable>True</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
