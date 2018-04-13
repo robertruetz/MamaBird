@@ -6,6 +6,7 @@ branches:
   - master
 image: Visual Studio 2017
 configuration: Release
+platform: Any CPU
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -19,8 +20,8 @@ nuget:
 before_build:
 - cmd: dotnet restore
 build:
+  project: .\MamaBird.sln
   publish_nuget: true
-  publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: minimal
 test:
