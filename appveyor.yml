@@ -6,7 +6,6 @@ branches:
   - master
 image: Visual Studio 2017
 configuration: Release
-platform: Any CPU
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -20,8 +19,8 @@ nuget:
 before_build:
 - cmd: dotnet restore
 build:
-  project: .\MamaBird.sln
   publish_nuget: true
+  publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: minimal
 test:
@@ -39,5 +38,6 @@ deploy:
   server: https://www.myget.org/F/robertruetz-ci/api/v2/package
   api_key:
     secure: kBa9n3Sh5DMRFrwYh7gOhdV7ho0GjJhOCx7npdj7J0II+PndJFceqvl4SjHx1dcH
+  symbol_server: https://www.myget.org/F/robertruetz-ci/symbols/api/v2/package 
   on:
     branch: master
