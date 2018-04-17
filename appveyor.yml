@@ -30,7 +30,7 @@ test:
 deploy:
 - provider: NuGet
   api_key:
-    secure: w5bF0sAFDRh8GarN8MgQiG/f8k1D3A9uiSVIWGRJio2w4qipLItnqD0CySMKeUQq
+    secure: pTgIIGkyHAce9lrHPFbwGshqhXZ0yIehKikjK1/SLv+4ZDgHMVk2Jn5s7OIsYuVj
   on:
     branch: master
     appveyor_repo_tag: true
